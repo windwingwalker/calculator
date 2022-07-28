@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  default:
+    build: .
+    volumes:
+      - ../:/workspace/:cached
+      - ../../../model/:/lib/model/
+      - ~/.aws/credentials:/root/.aws/credentials
+      - vscode-extension-python:/root/.vscode-server/extensions
+    command: /bin/sh -c "pip install --no-cache-dir -r /workspace/requirements.txt && while sleep 1000; do :; done;"
+    networks:
+      - default
+
+volumes:
+  vscode-extension-python:
+    external: true
+
+networks:
+  default:
+    external: true
+    name: development

@@ -1,0 +1,11 @@
+{
+	"name": "Gathering Fee Calculator",
+
+	"dockerComposeFile": [
+		"docker-compose.yml"
+	],
+
+	"service": "default",
+
+	"workspaceFolder": "/workspace"
+}

@@ -1,0 +1,4 @@
+termcolor==1.1.0 
+numpy
+pandas
+boto3
