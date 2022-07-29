@@ -1,3 +1,7 @@
+locals {
+  environment_map = var.lambda_env_var == null ? [] : [var.lambda_env_var]
+}
+
 data "aws_iam_role" "default" {
   name = "lambda-admin"
 }
@@ -29,8 +33,11 @@ resource "aws_lambda_function" "default" {
   publish              = true
   
   # Optional
-  environment {
-    variables = var.lambda_env_var
+  dynamic "environment" {
+    for_each = local.environment_map
+    content {
+      variables = environment.value
+    }
   }
 
   depends_on = [
