@@ -24,12 +24,14 @@ module "lambda" {
   image_tag = var.image_tag
 }
 
-# module "api-route" {
-#   source = "../../../iac/modules/api-route/"
-#   api_id = var.api_id
-#   resource_name = var.resource_name
-#   ms_name = var.ms_name
-#   http_method = var.http_method
-#   aws_region = var.aws_region
-#   function_arn = module.lambda.function_arn
-# }
+module "api" {
+  source = "../../../iac/modules/api-route/"
+  project_name = var.project_name
+  resource_name = var.resource_name
+  ms_name = var.ms_name
+  aws_region = var.aws_region
+  function_arn = module.lambda.function_arn
+  http_method = var.http_method
+  authorizer_id = null
+  authorization = "NONE"
+}

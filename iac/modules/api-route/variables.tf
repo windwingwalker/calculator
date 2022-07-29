@@ -1,23 +1,32 @@
-variable "api_id" {
-  type = string
+variable "app_name" {
+  type = string 
 }
 
 variable "resource_name" {
-  type = string
+  type = string 
 }
 
 variable "ms_name" {
-  type = string
-}
-
-variable "http_method" {
-  type = string
-}
-
-variable "function_arn" {
-  type = string
+  type = string 
 }
 
 variable "aws_region" {
-  type = string
+  type    = string
+}
+
+variable "function_arn" {
+  type    = string
+}
+
+variable "http_method" {
+  type    = string
+  default = "GET"
+}
+
+variable "authorizer_id" {
+  type    = string
+}
+
+variable "authorization" {
+  type    = string
 }

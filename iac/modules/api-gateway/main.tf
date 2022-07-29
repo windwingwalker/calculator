@@ -1,66 +1,81 @@
-resource "aws_apigatewayv2_api" "default" {
-  name          = "${var.project_name}-gateway"
-  protocol_type = "HTTP"
+resource "aws_api_gateway_rest_api" "default"{
+  name = "${var.project_name}-gateway"
 }
 
-resource "aws_apigatewayv2_stage" "dev" {
-  api_id = aws_apigatewayv2_api.default.id
-
-  name        = "dev"
-  auto_deploy = true
-  stage_variables = {
-    "alias" = "dev"
-  }
-
-  access_log_settings {
-    destination_arn = aws_cloudwatch_log_group.default.arn
-
-    format = jsonencode({
-      requestId               = "$context.requestId"
-      sourceIp                = "$context.identity.sourceIp"
-      requestTime             = "$context.requestTime"
-      protocol                = "$context.protocol"
-      httpMethod              = "$context.httpMethod"
-      resourcePath            = "$context.resourcePath"
-      routeKey                = "$context.routeKey"
-      status                  = "$context.status"
-      responseLength          = "$context.responseLength"
-      integrationErrorMessage = "$context.integrationErrorMessage"
-      }
-    )
-  }
+resource "aws_api_gateway_resource" "gathering-fee" {
+  parent_id   = aws_api_gateway_rest_api.default.root_resource_id
+  path_part   = "gathering-fee"
+  rest_api_id = aws_api_gateway_rest_api.default.id
 }
 
-resource "aws_apigatewayv2_stage" "prod" {
-  api_id = aws_apigatewayv2_api.default.id
+# resource "aws_api_gateway_stage" "dev" {
+#   depends_on = [aws_cloudwatch_log_group.dev]
 
-  name        = "prod"
-  auto_deploy = false
-  stage_variables = {
-    "alias" = "prod"
-  }
+#   rest_api_id = aws_api_gateway_rest_api.default.id
+#   deployment_id = "55upo8"
+#   stage_name = "dev"
+#   variables = {
+#     alias = "dev"
+#   }
+#   access_log_settings {
+#     destination_arn = aws_cloudwatch_log_group.dev.arn
+#     format = "{ \"requestId\":\"$context.requestId\", \"ip\": \"$context.identity.sourceIp\", \"caller\":\"$context.identity.caller\", \"user\":\"$context.identity.user\",\"requestTime\":\"$context.requestTime\", \"httpMethod\":\"$context.httpMethod\",\"resourcePath\":\"$context.resourcePath\", \"status\":\"$context.status\",\"protocol\":\"$context.protocol\", \"responseLength\":\"$context.responseLength\" }"
+#   }
+# }
 
-  access_log_settings {
-    destination_arn = aws_cloudwatch_log_group.default.arn
+# resource "aws_api_gateway_method_settings" "dev" {
+#   rest_api_id = aws_api_gateway_rest_api.default.id
+#   stage_name  = aws_api_gateway_stage.dev.stage_name
+#   method_path = "*/*"
 
-    format = jsonencode({
-      requestId               = "$context.requestId"
-      sourceIp                = "$context.identity.sourceIp"
-      requestTime             = "$context.requestTime"
-      protocol                = "$context.protocol"
-      httpMethod              = "$context.httpMethod"
-      resourcePath            = "$context.resourcePath"
-      routeKey                = "$context.routeKey"
-      status                  = "$context.status"
-      responseLength          = "$context.responseLength"
-      integrationErrorMessage = "$context.integrationErrorMessage"
-      }
-    )
-  }
-}
+#   settings {
+#     metrics_enabled        = true
+#     data_trace_enabled     = false
+#     logging_level          = "INFO"
 
-resource "aws_cloudwatch_log_group" "default" {
-  name = "/aws/api_gw/${aws_apigatewayv2_api.default.name}"
+#     # Limit the rate of calls to prevent abuse and unwanted charges
+#     throttling_rate_limit  = 100
+#     throttling_burst_limit = 50
+#   }
+# }
 
-  retention_in_days = 30
-}
+# resource "aws_api_gateway_stage" "prod" {
+#   depends_on = [aws_cloudwatch_log_group.prod]
+
+#   rest_api_id = aws_api_gateway_rest_api.default.id
+#   deployment_id = "55upo8"
+#   stage_name = "prod"
+#   variables = {
+#     alias = "prod"
+#   }
+#   access_log_settings {
+#     destination_arn = aws_cloudwatch_log_group.prod.arn
+#     format = "{ \"requestId\":\"$context.requestId\", \"ip\": \"$context.identity.sourceIp\", \"caller\":\"$context.identity.caller\", \"user\":\"$context.identity.user\",\"requestTime\":\"$context.requestTime\", \"httpMethod\":\"$context.httpMethod\",\"resourcePath\":\"$context.resourcePath\", \"status\":\"$context.status\",\"protocol\":\"$context.protocol\", \"responseLength\":\"$context.responseLength\" }"
+#   }
+# }
+
+# resource "aws_api_gateway_method_settings" "prod" {
+#   rest_api_id = aws_api_gateway_rest_api.default.id
+#   stage_name  = aws_api_gateway_stage.prod.stage_name
+#   method_path = "*/*"
+
+#   settings {
+#     metrics_enabled        = true
+#     data_trace_enabled     = false
+#     logging_level          = "INFO"
+
+#     # Limit the rate of calls to prevent abuse and unwanted charges
+#     throttling_rate_limit  = 100
+#     throttling_burst_limit = 50
+#   }
+# }
+
+# resource "aws_cloudwatch_log_group" "dev" {
+#   name              = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.default.id}/dev"
+#   retention_in_days = 30
+# }
+
+# resource "aws_cloudwatch_log_group" "prod" {
+#   name              = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.default.id}/prod"
+#   retention_in_days = 30
+# }

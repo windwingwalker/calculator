@@ -24,7 +24,3 @@ variable "http_method" {
 variable "image_tag" {
   type = string 
 }
-
-variable "api_id" {
-  type = string 
-}
