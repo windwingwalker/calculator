@@ -24,6 +24,11 @@ pipeline{
     ansiColor('xterm')
   }
   stages{
+    stage('Gather Files'){
+      steps{
+        sh "mv model/ microservices/${TF_VAR_ms_name}/"
+      }
+    }
     stage('Build Image'){
       steps{
         sh 'ls -al'
