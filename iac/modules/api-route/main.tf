@@ -28,4 +28,8 @@ resource "aws_lambda_permission" "default" {
   principal     = "apigateway.amazonaws.com"
 
   source_arn = "${aws_apigatewayv2_api.default.execution_arn}/*/*"
+
+  depends_on = [
+    aws_apigatewayv2_api.default
+  ]
 }
