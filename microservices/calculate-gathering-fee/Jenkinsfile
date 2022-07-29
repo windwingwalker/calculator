@@ -25,7 +25,7 @@ pipeline{
   stages{
     stage('Gather Files'){
       steps{
-        sh "rsync -av model/ microservices/${TF_VAR_ms_name}/model"
+        sh "rsync -av model/ microservices/${MS_NAME}/model"
       }
     }
     stage('Build Image'){
