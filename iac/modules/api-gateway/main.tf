@@ -71,11 +71,11 @@ resource "aws_api_gateway_method_settings" "prod" {
 }
 
 resource "aws_cloudwatch_log_group" "dev" {
-  name              = "/aws/api_gw/${var.project_name}-gateway/dev"
+  name              = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.default.id}/dev"
   retention_in_days = 30
 }
 
 resource "aws_cloudwatch_log_group" "prod" {
-  name              = "/aws/api_gw/${var.project_name}-gateway/prod"
+  name              = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.default.id}/prod"
   retention_in_days = 30
 }
