@@ -12,19 +12,17 @@ pipeline{
   tools {
     terraform 'TerraformDefault'
   }
-  // options {
-  //   ansiColor('xterm')
-  // }
+  options {
+    ansiColor('xterm')
+  }
   stages{
     stage('Deploy'){
-      // when { changeset "iac/**"}
       steps{
         dir('iac'){
           sh 'terraform init -input=false'
           sh 'terraform plan -out=tfplan -input=false'
           sh 'terraform apply -input=false -auto-approve tfplan'
         }
-        sh 'rm -rf dist/' 
       }
     }
   }
