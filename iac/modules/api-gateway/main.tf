@@ -8,6 +8,9 @@ resource "aws_apigatewayv2_stage" "dev" {
 
   name        = "dev"
   auto_deploy = true
+  stage_variables = {
+    "env" = "dev"
+  }
 
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.default.arn
@@ -33,6 +36,9 @@ resource "aws_apigatewayv2_stage" "prod" {
 
   name        = "prod"
   auto_deploy = false
+  stage_variables = {
+    "env" = "prod"
+  }
 
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.default.arn

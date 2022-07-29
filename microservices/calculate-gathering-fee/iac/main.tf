@@ -30,5 +30,6 @@ module "api-route" {
   resource_name = var.resource_name
   ms_name = var.ms_name
   http_method = var.http_method
-  lambda_function_invoke_arn = module.lambda.function_invoke_arn
+  aws_region = var.aws_region
+  function_arn = module.lambda.function_arn
 }

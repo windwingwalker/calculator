@@ -14,6 +14,10 @@ variable "http_method" {
   type = string
 }
 
-variable "lambda_function_invoke_arn" {
-  description = "Lambda's Arn for API Gateway to invoke lambda"
+variable "function_arn" {
+  type = string
+}
+
+variable "aws_region" {
+  type = string
 }
