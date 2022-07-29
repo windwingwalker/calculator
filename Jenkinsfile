@@ -17,7 +17,7 @@ pipeline{
   // }
   stages{
     stage('Deploy'){
-      when { changeset "iac/**"}
+      // when { changeset "iac/**"}
       steps{
         dir('iac'){
           sh 'terraform init -input=false'
