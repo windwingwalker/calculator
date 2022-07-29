@@ -13,7 +13,7 @@ resource "aws_apigatewayv2_integration" "default" {
 resource "aws_apigatewayv2_route" "default" {
   api_id = var.api_id
 
-  route_key = "${var.http_method} ${var.resource_name}"
+  route_key = "${var.http_method}/${var.resource_name}"
   target    = "integrations/${aws_apigatewayv2_integration.default.id}"
 
   depends_on = [
