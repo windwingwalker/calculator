@@ -18,9 +18,9 @@ provider "aws" {
   }
 }
 
-module "api-gateway" {
-  source = "./modules/api-gateway"
-  project_name = var.project_name
-}
+# module "api-gateway" {
+#   source = "./modules/api-gateway"
+#   project_name = var.project_name
+# }
 
 
