@@ -27,9 +27,5 @@ resource "aws_lambda_permission" "default" {
   function_name = var.ms_name
   principal     = "apigateway.amazonaws.com"
 
-  source_arn = "${aws_apigatewayv2_api.default.execution_arn}/*/*"
-
-  depends_on = [
-    aws_apigatewayv2_api.default
-  ]
+  source_arn = "${data.aws_apigatewayv2_api.default.execution_arn}/*/*"
 }
