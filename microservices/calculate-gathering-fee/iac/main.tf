@@ -22,6 +22,7 @@ module "lambda" {
   source = "../../../iac/modules/lambda/"
   ms_name = var.ms_name
   image_tag = var.image_tag
+  lambda_env_var = null
 }
 
 module "api" {

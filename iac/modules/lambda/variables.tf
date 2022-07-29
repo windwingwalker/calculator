@@ -5,3 +5,7 @@ variable "ms_name" {
 variable "image_tag" {
   type = string
 }
+
+variable "lambda_env_var" {
+  type = map
+}

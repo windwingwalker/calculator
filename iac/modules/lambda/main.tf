@@ -15,6 +15,9 @@ resource "aws_lambda_alias" "default" {
   name             = "dev"
   function_name    = aws_lambda_function.default.arn
   function_version = aws_lambda_function.default.version
+  depends_on = [
+    aws_lambda_function.default
+  ]
 }
 
 resource "aws_lambda_function" "default" {
@@ -26,6 +29,10 @@ resource "aws_lambda_function" "default" {
   publish              = true
   
   # Optional
+  environment {
+    variables = var.lambda_env_var
+  }
+
   depends_on = [
     aws_ecr_repository.default,
     aws_cloudwatch_log_group.default
