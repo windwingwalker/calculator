@@ -15,7 +15,7 @@ pipeline{
     TF_VAR_ms_name             = "${MS_NAME}"
     TF_VAR_http_method         = "${HTTP_METHOD}"
     TF_VAR_image_tag           = "${env.BUILD_NUMBER}"
-    TF_VAR_api_id              = "tbc"
+    TF_VAR_api_id              = "ki0asajan1"
   }
   tools {
     terraform 'TerraformDefault'
