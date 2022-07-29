@@ -9,12 +9,12 @@ pipeline{
 
     TF_VAR_project_name            = "${PROJECT_NAME}"
   }
-  tools {
-    terraform 'TerraformDefault'
-  }
-  options {
-    ansiColor('xterm')
-  }
+  // tools {
+  //   terraform 'TerraformDefault'
+  // }
+  // options {
+  //   ansiColor('xterm')
+  // }
   stages{
     stage('Deploy'){
       when { changeset "iac/**"}
