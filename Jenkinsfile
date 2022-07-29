@@ -9,9 +9,9 @@ pipeline{
 
     TF_VAR_project_name            = "${PROJECT_NAME}"
   }
-  // tools {
-  //   terraform 'TerraformDefault'
-  // }
+  tools {
+    terraform 'TerraformDefault'
+  }
   // options {
   //   ansiColor('xterm')
   // }
