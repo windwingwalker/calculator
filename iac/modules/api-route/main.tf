@@ -6,7 +6,7 @@ resource "aws_apigatewayv2_integration" "default" {
   api_id = var.api_id
 
   integration_uri    = "arn:aws:apigateway:${var.aws_region}:lambda:path/2015-03-31/functions/${var.function_arn}:$${stageVariables.alias}/invocations"
-  integration_type   = "AWS_PROXY"
+  integration_type   = "HTTP_PROXY"
   integration_method = "POST"
 }
 
