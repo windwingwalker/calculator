@@ -15,6 +15,10 @@ resource "aws_apigatewayv2_route" "default" {
 
   route_key = "${var.http_method} ${var.resource_name}"
   target    = "integrations/${aws_apigatewayv2_integration.default.id}"
+
+  depends_on = [
+    aws_apigatewayv2_integration.default
+  ]
 }
 
 resource "aws_lambda_permission" "default" {
