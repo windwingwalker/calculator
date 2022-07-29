@@ -9,7 +9,7 @@ resource "aws_apigatewayv2_stage" "dev" {
   name        = "dev"
   auto_deploy = true
   stage_variables = {
-    "env" = "dev"
+    "alias" = "dev"
   }
 
   access_log_settings {
@@ -37,7 +37,7 @@ resource "aws_apigatewayv2_stage" "prod" {
   name        = "prod"
   auto_deploy = false
   stage_variables = {
-    "env" = "prod"
+    "alias" = "prod"
   }
 
   access_log_settings {
