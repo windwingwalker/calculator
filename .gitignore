@@ -35,12 +35,25 @@
 **/hello-world.zip
 **/response.json
 
+**/ibond
+
 # Misc
 **/.terraform.lock.hcl
+
+## Nodejs
+**/node_modules/
+## Python
 **/__pycache__/
+**/pythonclient/
+## Dev
+**/.devcontainer/
+**/test.md
+**/response.json
 **/package/
 **/export/
-**/node_modules/
-**/test.md
-**/input.json
-**/ibond/
+**/input.*
+**/dist/
+**/*.zip
+**/*cache*/*
+## Misc
+**/.DS_Store
